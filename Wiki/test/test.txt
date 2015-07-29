@@ -1,0 +1,80 @@
+= Инструкция по конвертированию документов .docx в формат MediaWiki и созданию wiki страниц =
+
+== Установка PowerShell ==
+
+# Скачайте PowerShell на машину, где развернута вики и установите его при необходимости
+
+https://technet.microsoft.com/ru-ru/library/hh847837.aspx#BKMK_InstallingOnWindows8andWindowsServer2012
+
+== Использование утилиты Convert ==
+
+# Создайте на машине, где развернута wiki, папку C:\wiki и разархивируйте в папку Convert содержимое архива Convert.zip
+# 
+
+<blockquote>[[Image:media/image1.png]]
+</blockquote>
+# Содержимое папки convert состоит из:
+
+{|
+!'''Элемент'''
+!'''Назначение'''
+|-
+|convert.ps1
+|PowerShell скрипт, выполняющие работу по конвертации .docx документа в формат MediaWiki
+|-
+|Pandoc.exe
+|Приложении для конвертации документов, скаченное с сайта [http://pandoc.org/installing.html ''http://pandoc.org/installing.html'']
+|-
+|Source
+|Папка, в которую помещаются .docx документы, которые необходимо конвертировать
+|-
+|Wiki
+|Папка, содержащая результаты конвертации .docx документов: изображения с уникальными наименованиями и wiki markup
+|}
+
+# Скопируйте требуемые для конвертации документы .docx в папку C:\Wiki\convert\Source
+
+<blockquote>[[Image:media/image2.png]]
+</blockquote>
+# Откройте PowerShell, перейдите в папку C:\wiki\convert и запустите команду
+
+<blockquote>.\convert.ps1
+
+[[Image:media/image3.png]]
+</blockquote>
+# После выполнения скрипта перейдите в папку C:\Wiki\convert\Wiki\ в папку с названием конвертированного файла
+# Проверьте наличие папки Images и файл ready_наименование .docx файла.txt в директории
+
+<blockquote>[[Image:media/image4.png]]
+</blockquote>
+# Откройте файл ready_наименование .docx файла.txt в текстовом редакторе и проверьте наличие wiki разметки и ссылок на файлы картинок при их наличии.
+
+== Создание wiki страницы по результатам работы утилиты Convert ==
+
+# Перейдите к созданию вики страницы
+
+[[Image:media/image5.png]]
+
+# Скопируйте в вики редактор содержимое файла ready_наименование .docx файла.txt
+# Перенесите все изображения новой статьи в поле загрузки файлов (эта функция доступна при установке расширения MsUpload) и загрузите файлы в wiki
+
+[[Image:media/image6.png]]
+
+# Добавьте в wiki разметку дополнительные теги, например &lt;pre&gt; для заранее отформатированного текста.
+# Нажмите на кнопку Записать страницу
+# Убедитесь, что страница сохранена с правильным форматированием и изображениями
+
+[[Image:media/image7.png]]
+
+== Замечания ==
+
+# Если документ сконвертировался без изображений, откройте оригинал документа docx в Word, сохраните его еще раз и попробуйте произвести конвертацию заново.
+# Если вы хотите перенести в Wiki документ PDF, то сначала его нужно сконвертировать в docx, например с помощью [http://convertonlinefree.com/PDFToWORDEN.aspx ''http://convertonlinefree.com/PDFToWORDEN.aspx'']
+# Если изображений много, то для их загрузки в wiki можно воспользоваться утилитой [http://www.mediawiki.org/wiki/Manual:ImportImages.php ''http://www.mediawiki.org/wiki/Manual:ImportImages.php'']
+
+Например для загрузки изображений в разобранном примере следует открыть командную строку, перейти в папку C:\wamp\bin\php\php5.5.12 и запустить команду:
+
+Php.exe C:\wamp\www\maintenance\importImages.php “C:\Wiki\convert\Wiki\Имя docx файла\Images” png jpg
+
+<blockquote>[[Image:media/image8.png]]
+</blockquote>
